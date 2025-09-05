@@ -3,14 +3,82 @@ import { Link } from "react-router-dom";
 export default function Index() {
   return (
     <div>
+      {/* Header */}
+      <nav style={{ 
+        display: "flex", 
+        justifyContent: "space-between", 
+        alignItems: "center", 
+        padding: "20px 24px",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10
+      }}>
+        <div style={{ 
+          fontSize: "22px", 
+          fontWeight: 300, 
+          color: "#fff",
+          letterSpacing: "0.04em"
+        }}>
+          Circle X
+        </div>
+        <div>
+          <Link to="/onboarding/step1" className="btn btn-outline">I have an invite</Link>
+        </div>
+      </nav>
+
       {/* Hero */}
       <section className="hero">
         <div className="container center">
-          <div className="mt-8">
-            <Link to="/onboarding/step1" className="btn btn-primary">Request Access</Link>
+          <div className="badge" style={{ marginBottom: "32px" }}>
+            🔒 Invitation Only
           </div>
-          <div style={{ color: "rgba(255,255,255,0.7)", marginTop: 8, fontSize: 14 }}>
-            Applications reviewed weekly
+          
+          <h1 style={{ 
+            fontSize: "clamp(48px, 8vw, 96px)", 
+            fontWeight: 300, 
+            margin: "0 0 16px", 
+            letterSpacing: "-0.02em"
+          }}>
+            Circle X
+          </h1>
+          
+          <div style={{ 
+            width: "60px", 
+            height: "1px", 
+            background: "#fff", 
+            margin: "0 auto 24px" 
+          }} />
+          
+          <h2 style={{ 
+            fontSize: "clamp(20px, 4vw, 32px)", 
+            fontWeight: 300, 
+            margin: "0 0 24px",
+            letterSpacing: "-0.01em"
+          }}>
+            India's most <span style={{ fontWeight: 500 }}>exclusive</span> founder network
+          </h2>
+          
+          <p style={{ 
+            color: "rgba(255,255,255,0.7)", 
+            fontSize: "18px", 
+            maxWidth: "600px", 
+            margin: "0 auto 32px", 
+            lineHeight: "1.6"
+          }}>
+            A private sanctuary for India's most ambitious builders. Where vision meets execution, and connections change everything.
+          </p>
+          
+          <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+            <input 
+              className="input"
+              placeholder="Enter your email"
+              style={{ marginBottom: "16px" }}
+            />
+            <Link to="/onboarding/step1" className="btn btn-primary" style={{ width: "100%" }}>
+              Request Access
+            </Link>
           </div>
         </div>
       </section>
@@ -102,7 +170,9 @@ export default function Index() {
 
       {/* Footer */}
       <footer className="footer">
-        © {new Date().getFullYear()} Circle X — All rights reserved.
+        <div style={{ textAlign: "right", color: "rgba(255,255,255,0.5)", fontSize: "13px" }}>
+          Made by <span style={{ fontWeight: 500 }}>MGX</span>
+        </div>
       </footer>
     </div>
   );

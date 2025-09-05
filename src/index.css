@@ -127,10 +127,13 @@ body {
 
 /* Hero */
 .hero { 
-  padding: 120px 0 80px; 
+  padding: 120px 0 60px; 
   position: relative; 
   overflow: hidden; 
   background: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 .hero-glow {
   position: absolute; 
@@ -154,9 +157,10 @@ body {
 .section { padding: 80px 0; }
 .pillars .item { text-align: center; }
 .feature-icon { 
-  font-size: 32px; 
-  margin-bottom: 16px; 
+  font-size: 40px; 
+  margin-bottom: 20px; 
   display: block;
+  opacity: 0.9;
 }
 .section h4 { 
   margin: 0 0 12px; 
@@ -260,7 +264,12 @@ body {
 }
 
 /* Footer */
-.footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 36px 0; color: rgba(255,255,255,0.5); text-align: center; font-size: 13px; }
+.footer { 
+  border-top: 1px solid rgba(255,255,255,0.1); 
+  padding: 36px 24px; 
+  color: rgba(255,255,255,0.5); 
+  font-size: 13px; 
+}
 
 /* Responsive grid fallback */
 @media (max-width: 900px) {
