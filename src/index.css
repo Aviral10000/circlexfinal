@@ -224,6 +224,14 @@ body {
   box-shadow: 0 4px 12px rgba(255,255,255,0.15);
 }
 
+/* Membership Selection */
+.card.selected {
+  border-color: #fff !important;
+  background: rgba(255,255,255,0.1) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255,255,255,0.2);
+}
+
 /* Footer */
 .footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 36px 0; color: rgba(255,255,255,0.5); text-align: center; font-size: 13px; }
 

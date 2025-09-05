@@ -10,7 +10,7 @@ export default function Index() {
           <span className="brand-name">Circle X</span>
         </div>
         <div>
-          <Link to="/onboarding" className="btn btn-outline">I have an invite</Link>
+          <Link to="/onboarding/step1" className="btn btn-outline">I have an invite</Link>
         </div>
       </nav>
 
@@ -27,7 +27,7 @@ export default function Index() {
             Where vision meets execution—and every connection has intent. No noise. No spam. Just outcomes.
           </p>
           <div className="mt-8">
-            <Link to="/onboarding" className="btn btn-primary">Apply for Access</Link>
+            <Link to="/onboarding/step1" className="btn btn-primary">Apply for Access</Link>
             <a href="#why" className="btn btn-outline" style={{ marginLeft: 12 }}>Why Circle X</a>
           </div>
           <div style={{ color: "rgba(255,255,255,0.45)", marginTop: 10, fontSize: 13 }}>
@@ -75,7 +75,7 @@ export default function Index() {
         </div>
 
         <div className="container center mt-16">
-          <Link to="/onboarding" className="btn btn-primary">Start Application</Link>
+          <Link to="/onboarding/step1" className="btn btn-primary">Start Application</Link>
           <div style={{ color: "rgba(255,255,255,0.45)", marginTop: 10, fontSize: 13 }}>
             Takes ~2 minutes
           </div>
