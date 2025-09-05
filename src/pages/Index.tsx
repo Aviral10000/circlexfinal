@@ -3,81 +3,99 @@ import { Link } from "react-router-dom";
 export default function Index() {
   return (
     <div>
-      {/* Nav */}
-      <nav className="nav">
-        <div className="brand">
-          <div className="brand-dot" />
-          <span className="brand-name">Circle X</span>
-        </div>
-        <div>
-          <Link to="/onboarding/step1" className="btn btn-outline">I have an invite</Link>
-        </div>
-      </nav>
-
       {/* Hero */}
       <section className="hero">
-        <div className="hero-glow" />
         <div className="container center">
-          <span className="badge">🔒 Invitation Only • Curated Founders</span>
-          <h1 className="mt-8">
-            A private network for India’s most
-            <span>ambitious builders</span>
-          </h1>
-          <p>
-            Where vision meets execution—and every connection has intent. No noise. No spam. Just outcomes.
-          </p>
           <div className="mt-8">
-            <Link to="/onboarding/step1" className="btn btn-primary">Apply for Access</Link>
-            <a href="#why" className="btn btn-outline" style={{ marginLeft: 12 }}>Why Circle X</a>
+            <Link to="/onboarding/step1" className="btn btn-primary">Request Access</Link>
           </div>
-          <div style={{ color: "rgba(255,255,255,0.45)", marginTop: 10, fontSize: 13 }}>
+          <div style={{ color: "rgba(255,255,255,0.7)", marginTop: 8, fontSize: 14 }}>
             Applications reviewed weekly
           </div>
         </div>
       </section>
 
-      {/* Indicators */}
+      {/* Feature Highlights */}
       <section className="section">
         <div className="container pillars grid grid-3">
           <div className="item">
-            <div className="emoji">👑</div>
+            <div className="feature-icon">👑</div>
             <h4>Curated</h4>
             <p>Hand-picked founders only</p>
           </div>
           <div className="item">
-            <div className="emoji">💎</div>
+            <div className="feature-icon">💎</div>
             <h4>Private</h4>
-            <p>Invite-only access</p>
+            <p>Invitation-only access</p>
           </div>
           <div className="item">
-            <div className="emoji">✨</div>
-            <h4>High-Intent</h4>
-            <p>No spam, just signal</p>
+            <div className="feature-icon">✨</div>
+            <h4>Elite</h4>
+            <p>India's top builders</p>
           </div>
         </div>
       </section>
 
-      {/* Why */}
-      <section id="why" className="section">
+      {/* The Problem */}
+      <section className="section">
+        <div className="container center">
+          <h2 style={{ fontSize: "48px", fontWeight: 300, margin: "0 0 48px", letterSpacing: "-0.02em" }}>
+            The Problem
+          </h2>
+        </div>
         <div className="container grid grid-3">
           <div className="card">
             <h4>LinkedIn is Noise</h4>
-            <p>Cold DMs, random connects, vanity metrics. We optimize for outcomes—not follower counts.</p>
+            <p>Endless spam, random connections, zero signal in the noise.</p>
           </div>
           <div className="card">
             <h4>Events are Outdated</h4>
-            <p>Forced small talk and business cards nobody read. Circle X is digital-first and curated.</p>
+            <p>Forced networking, small talk, business cards nobody reads.</p>
           </div>
           <div className="card">
             <h4>Quality is Rare</h4>
-            <p>We screen for real operators and founders. Every connection is vetted.</p>
+            <p>Finding serious builders in a sea of wannabe entrepreneurs.</p>
           </div>
         </div>
+      </section>
 
-        <div className="container center mt-16">
-          <Link to="/onboarding/step1" className="btn btn-primary">Start Application</Link>
-          <div style={{ color: "rgba(255,255,255,0.45)", marginTop: 10, fontSize: 13 }}>
-            Takes ~2 minutes
+      {/* The Solution */}
+      <section className="section">
+        <div className="container center">
+          <h2 style={{ fontSize: "48px", fontWeight: 300, margin: "0 0 48px", letterSpacing: "-0.02em" }}>
+            The Solution
+          </h2>
+        </div>
+        <div className="container grid grid-3">
+          <div className="solution-card">
+            <div className="solution-icon">⚡</div>
+            <h4>Curated Matching</h4>
+            <p>Only connect with vetted founders who match your vision and ambition.</p>
+          </div>
+          <div className="solution-card">
+            <div className="solution-icon">👥</div>
+            <h4>Exclusive Access</h4>
+            <p>Invitation-only network ensures you meet India's most serious builders.</p>
+          </div>
+          <div className="solution-card">
+            <div className="solution-icon">🛡️</div>
+            <h4>Zero Spam</h4>
+            <p>Credits system and verification eliminate noise, maximize signal.</p>
+          </div>
+          <div className="solution-card">
+            <div className="solution-icon">⭐</div>
+            <h4>Smart Introductions</h4>
+            <p>AI-crafted icebreakers and seamless calendar integration.</p>
+          </div>
+          <div className="solution-card">
+            <div className="solution-icon">✅</div>
+            <h4>Structured Collaboration</h4>
+            <p>Purpose-built boards for hiring, partnerships, and fundraising.</p>
+          </div>
+          <div className="solution-card">
+            <div className="solution-icon">➡️</div>
+            <h4>Digital First</h4>
+            <p>No forced meetups. Connect and collaborate on your terms.</p>
           </div>
         </div>
       </section>
