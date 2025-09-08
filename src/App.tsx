@@ -6,6 +6,11 @@ import OnboardingStep2 from "./pages/OnboardingStep2";
 import OnboardingStep3 from "./pages/OnboardingStep3";
 import OnboardingStep4 from "./pages/OnboardingStep4";
 import Success from "./pages/Success";
+import AdminDashboard from "./pages/AdminDashboard";
+import FounderDashboard from "./pages/FounderDashboard";
+import FounderLogin from "./pages/FounderLogin";
+import PasswordSetup from "./pages/PasswordSetup";
+import PasswordVerify from "./pages/PasswordVerify";
 
 function App() {
   return (
@@ -17,6 +22,11 @@ function App() {
       <Route path="/onboarding/step3" element={<OnboardingStep3 />} />
       <Route path="/onboarding/step4" element={<OnboardingStep4 />} />
       <Route path="/success" element={<Success />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/founder-login" element={<FounderLogin />} />
+      <Route path="/password-setup" element={<PasswordSetup />} />
+      <Route path="/password-verify" element={<PasswordVerify />} />
+      <Route path="/founder" element={<FounderDashboard />} />
     </Routes>
   );
 }

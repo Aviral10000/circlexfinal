@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import { reportError } from "../sentry";
 
 export default function OnboardingStep4() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ export default function OnboardingStep4() {
 
       if (error) {
         console.error("Supabase error:", error);
+        reportError(error, { step: 'onboarding-submit', payload });
         setMessage("❌ " + error.message);
       } else {
         console.log("Application submitted successfully");
@@ -75,6 +77,7 @@ export default function OnboardingStep4() {
       }
     } catch (err: any) {
       console.error("Application error:", err);
+      reportError(err, { step: 'onboarding-submit' });
       setMessage("🔥 " + err.message);
     } finally {
       setSubmitting(false);
@@ -255,3 +258,5 @@ export default function OnboardingStep4() {
     </div>
   );
 }
+
+

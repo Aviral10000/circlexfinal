@@ -23,7 +23,10 @@ export default function Index() {
         }}>
           Circle X
         </div>
-        <div>
+        <div style={{ display: "flex", gap: "12px" }}>
+          <Link to="/founder-login" className="btn btn-outline" style={{ fontSize: "14px", padding: "8px 16px" }}>
+            Founder Login
+          </Link>
           <Link to="/onboarding/step1" className="btn btn-outline">I have an invite</Link>
         </div>
       </nav>
