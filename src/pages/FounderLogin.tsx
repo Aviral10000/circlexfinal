@@ -59,7 +59,7 @@ export default function FounderLogin() {
           fontWeight: 300, 
           color: "#fff"
         }}>
-          Circle X
+          Circle x
         </div>
         <div>
           <button 
@@ -94,7 +94,7 @@ export default function FounderLogin() {
               textAlign: "center",
               fontSize: "16px"
             }}>
-              Access your Circle X founder network
+              Access your Circle x founder network
             </p>
 
             <form onSubmit={handleLogin}>

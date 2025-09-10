@@ -41,7 +41,13 @@ export default function PasswordVerify() {
         sessionStorage.setItem('founder_email', email);
         sessionStorage.setItem('founder_id', data.id);
         sessionStorage.removeItem('pending_email');
-        navigate('/founder');
+        
+        // Check if this is first-time login (no profile picture set)
+        if (!data.profile_picture_url) {
+          navigate('/profile-picture-setup');
+        } else {
+          navigate('/founder');
+        }
       }
     } catch (err) {
       setMessage("❌ Error verifying password. Please try again.");

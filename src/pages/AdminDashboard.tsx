@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import { reportError } from "../sentry";
+import { pitchService } from "../services/pitchService";
+import type { Pitch, Application } from "../services/pitchService";
+import { testService } from "../services/testService";
 
 interface Profile {
   id: string;
@@ -20,15 +23,25 @@ interface Profile {
 
 export default function AdminDashboard() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [pitches, setPitches] = useState<Pitch[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('pending');
+  const [activeTab, setActiveTab] = useState<'profiles' | 'pitches' | 'applications'>('profiles');
 
   useEffect(() => {
-    fetchProfiles();
-  }, [filter]);
+    if (activeTab === 'profiles') {
+      fetchProfiles();
+    } else if (activeTab === 'pitches') {
+      fetchPitches();
+    } else if (activeTab === 'applications') {
+      fetchApplications();
+    }
+  }, [filter, activeTab]);
 
   const fetchProfiles = async () => {
     try {
+      setLoading(true);
       let query = supabase.from('profiles').select('*');
       
       if (filter !== 'all') {
@@ -44,6 +57,30 @@ export default function AdminDashboard() {
       }
     } catch (err) {
       console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPitches = async () => {
+    try {
+      setLoading(true);
+      const data = await pitchService.getAllPitches();
+      setPitches(data);
+    } catch (err) {
+      console.error('Error fetching pitches:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchApplications = async () => {
+    try {
+      setLoading(true);
+      const data = await pitchService.getAllApplications();
+      setApplications(data);
+    } catch (err) {
+      console.error('Error fetching applications:', err);
     } finally {
       setLoading(false);
     }
@@ -66,6 +103,51 @@ export default function AdminDashboard() {
     } catch (err) {
       console.error('Error:', err);
       reportError(err as Error, { step: 'admin-update-status', profileId: id, status });
+    }
+  };
+
+  const updatePitchStatus = async (id: number, status: 'approved' | 'rejected') => {
+    try {
+      await pitchService.updatePitchStatus(id, status);
+      fetchPitches();
+    } catch (err) {
+      console.error('Error updating pitch status:', err);
+      reportError(err as Error);
+    }
+  };
+
+  const updateApplicationStatus = async (id: number, status: 'approved' | 'rejected') => {
+    try {
+      await pitchService.updateApplicationStatus(id, status);
+      fetchApplications();
+    } catch (err) {
+      console.error('Error updating application status:', err);
+      reportError(err as Error);
+    }
+  };
+
+  const testSupabaseConnection = async () => {
+    try {
+      const isConnected = await testService.testConnection();
+      if (isConnected) {
+        alert('✅ Supabase connection successful!');
+      } else {
+        alert('❌ Supabase connection failed!');
+      }
+    } catch (err) {
+      console.error('Connection test error:', err);
+      alert('❌ Connection test failed!');
+    }
+  };
+
+  const createTestAccount = async () => {
+    try {
+      const testProfile = await testService.createTestProfile();
+      alert(`✅ Test account created successfully!\nEmail: ${testProfile.email}`);
+      fetchProfiles();
+    } catch (err) {
+      console.error('Test account creation error:', err);
+      alert('❌ Failed to create test account!');
     }
   };
 
@@ -103,7 +185,39 @@ export default function AdminDashboard() {
         }}>
           Circle X Admin
         </div>
-        <div style={{ display: "flex", gap: "12px" }}>
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <button
+            onClick={testSupabaseConnection}
+            style={{
+              background: "#10b981",
+              border: "none",
+              borderRadius: "8px",
+              padding: "8px 16px",
+              color: "#fff",
+              fontSize: "14px",
+              fontWeight: "600",
+              cursor: "pointer",
+              marginRight: "8px"
+            }}
+          >
+            🔗 Test DB
+          </button>
+          <button
+            onClick={createTestAccount}
+            style={{
+              background: "#3b82f6",
+              border: "none",
+              borderRadius: "8px",
+              padding: "8px 16px",
+              color: "#fff",
+              fontSize: "14px",
+              fontWeight: "600",
+              cursor: "pointer",
+              marginRight: "8px"
+            }}
+          >
+            👤 Test Account
+          </button>
           <button
             onClick={() => setFilter('all')}
             className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-outline'}`}
@@ -135,6 +249,59 @@ export default function AdminDashboard() {
         </div>
       </nav>
 
+      {/* Tab Navigation */}
+      <div style={{
+        display: "flex",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
+        padding: "0 24px"
+      }}>
+        <button
+          onClick={() => setActiveTab('profiles')}
+          style={{
+            padding: "16px 24px",
+            background: activeTab === 'profiles' ? "rgba(16, 185, 129, 0.1)" : "transparent",
+            border: "none",
+            color: activeTab === 'profiles' ? "#10b981" : "rgba(255,255,255,0.6)",
+            fontSize: "16px",
+            fontWeight: activeTab === 'profiles' ? "600" : "400",
+            cursor: "pointer",
+            borderBottom: activeTab === 'profiles' ? "2px solid #10b981" : "2px solid transparent"
+          }}
+        >
+          Profiles ({profiles.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('pitches')}
+          style={{
+            padding: "16px 24px",
+            background: activeTab === 'pitches' ? "rgba(16, 185, 129, 0.1)" : "transparent",
+            border: "none",
+            color: activeTab === 'pitches' ? "#10b981" : "rgba(255,255,255,0.6)",
+            fontSize: "16px",
+            fontWeight: activeTab === 'pitches' ? "600" : "400",
+            cursor: "pointer",
+            borderBottom: activeTab === 'pitches' ? "2px solid #10b981" : "2px solid transparent"
+          }}
+        >
+          Pitches ({pitches.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('applications')}
+          style={{
+            padding: "16px 24px",
+            background: activeTab === 'applications' ? "rgba(16, 185, 129, 0.1)" : "transparent",
+            border: "none",
+            color: activeTab === 'applications' ? "#10b981" : "rgba(255,255,255,0.6)",
+            fontSize: "16px",
+            fontWeight: activeTab === 'applications' ? "600" : "400",
+            cursor: "pointer",
+            borderBottom: activeTab === 'applications' ? "2px solid #10b981" : "2px solid transparent"
+          }}
+        >
+          Applications ({applications.length})
+        </button>
+      </div>
+
       {/* Stats */}
       <div style={{ padding: "24px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "32px" }}>
@@ -164,9 +331,10 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Applications List */}
-        <div style={{ display: "grid", gap: "16px" }}>
-          {profiles.map((profile) => (
+        {/* Content based on active tab */}
+        {activeTab === 'profiles' && (
+          <div style={{ display: "grid", gap: "16px" }}>
+            {profiles.map((profile) => (
             <div key={profile.id} className="card">
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
                 <div>
@@ -266,12 +434,166 @@ export default function AdminDashboard() {
                 )}
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {profiles.length === 0 && (
+        {activeTab === 'pitches' && (
+          <div style={{ display: "grid", gap: "16px" }}>
+            {pitches.map((pitch) => (
+              <div key={pitch.id} className="card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
+                  <div>
+                    <h3 style={{ fontSize: "20px", fontWeight: "500", margin: "0 0 4px" }}>
+                      Pitch to {pitch.target_name}
+                    </h3>
+                    <p style={{ color: "rgba(255,255,255,0.7)", margin: "0 0 8px" }}>
+                      From: {pitch.founder_email}
+                    </p>
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", margin: "0" }}>
+                      Type: {pitch.target_type} • ID: {pitch.target_id}
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    <span style={{
+                      padding: "4px 12px",
+                      borderRadius: "20px",
+                      fontSize: "12px",
+                      fontWeight: "500",
+                      background: getStatusColor(pitch.status),
+                      color: "#fff"
+                    }}>
+                      {pitch.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ marginBottom: "16px" }}>
+                  <p style={{ color: "rgba(255,255,255,0.8)", lineHeight: "1.5" }}>
+                    {pitch.message}
+                  </p>
+                </div>
+
+                {pitch.pitch_deck_link && (
+                  <div style={{ marginBottom: "16px" }}>
+                    <a 
+                      href={pitch.pitch_deck_link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style={{ color: "#10b981", textDecoration: "none" }}
+                    >
+                      📄 View Pitch Deck →
+                    </a>
+                  </div>
+                )}
+
+                {pitch.status === 'pending' && (
+                  <div style={{ display: "flex", gap: "12px" }}>
+                    <button
+                      onClick={() => updatePitchStatus(pitch.id!, 'approved')}
+                      className="btn btn-primary"
+                      style={{ fontSize: "14px", padding: "8px 16px" }}
+                    >
+                      ✅ Approve
+                    </button>
+                    <button
+                      onClick={() => updatePitchStatus(pitch.id!, 'rejected')}
+                      className="btn btn-outline"
+                      style={{ fontSize: "14px", padding: "8px 16px", color: "#ef4444", borderColor: "#ef4444" }}
+                    >
+                      ❌ Reject
+                    </button>
+                  </div>
+                )}
+
+                <div style={{ 
+                  marginTop: "12px", 
+                  paddingTop: "12px", 
+                  borderTop: "1px solid rgba(255,255,255,0.1)",
+                  fontSize: "12px",
+                  color: "rgba(255,255,255,0.5)"
+                }}>
+                  Submitted: {pitch.created_at ? new Date(pitch.created_at).toLocaleDateString() : 'N/A'}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'applications' && (
+          <div style={{ display: "grid", gap: "16px" }}>
+            {applications.map((application) => (
+              <div key={application.id} className="card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
+                  <div>
+                    <h3 style={{ fontSize: "20px", fontWeight: "500", margin: "0 0 4px" }}>
+                      {application.target_type === 'mentor' ? 'Mentorship' : 'Cofounder'} Application to {application.target_name}
+                    </h3>
+                    <p style={{ color: "rgba(255,255,255,0.7)", margin: "0 0 8px" }}>
+                      From: {application.founder_email}
+                    </p>
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", margin: "0" }}>
+                      Type: {application.target_type} • ID: {application.target_id}
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    <span style={{
+                      padding: "4px 12px",
+                      borderRadius: "20px",
+                      fontSize: "12px",
+                      fontWeight: "500",
+                      background: getStatusColor(application.status),
+                      color: "#fff"
+                    }}>
+                      {application.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ marginBottom: "16px" }}>
+                  <p style={{ color: "rgba(255,255,255,0.8)", lineHeight: "1.5" }}>
+                    {application.message}
+                  </p>
+                </div>
+
+                {application.status === 'pending' && (
+                  <div style={{ display: "flex", gap: "12px" }}>
+                    <button
+                      onClick={() => updateApplicationStatus(application.id!, 'approved')}
+                      className="btn btn-primary"
+                      style={{ fontSize: "14px", padding: "8px 16px" }}
+                    >
+                      ✅ Approve
+                    </button>
+                    <button
+                      onClick={() => updateApplicationStatus(application.id!, 'rejected')}
+                      className="btn btn-outline"
+                      style={{ fontSize: "14px", padding: "8px 16px", color: "#ef4444", borderColor: "#ef4444" }}
+                    >
+                      ❌ Reject
+                    </button>
+                  </div>
+                )}
+
+                <div style={{ 
+                  marginTop: "12px", 
+                  paddingTop: "12px", 
+                  borderTop: "1px solid rgba(255,255,255,0.1)",
+                  fontSize: "12px",
+                  color: "rgba(255,255,255,0.5)"
+                }}>
+                  Submitted: {application.created_at ? new Date(application.created_at).toLocaleDateString() : 'N/A'}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {((activeTab === 'profiles' && profiles.length === 0) || 
+          (activeTab === 'pitches' && pitches.length === 0) || 
+          (activeTab === 'applications' && applications.length === 0)) && (
           <div style={{ textAlign: "center", padding: "60px 0", color: "rgba(255,255,255,0.5)" }}>
-            No applications found for this filter.
+            No {activeTab} found.
           </div>
         )}
       </div>

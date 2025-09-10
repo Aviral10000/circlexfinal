@@ -15,15 +15,44 @@ export default function Index() {
         right: 0,
         zIndex: 10
       }}>
-        <div style={{ 
-          fontSize: "22px", 
-          fontWeight: 300, 
-          color: "#fff",
-          letterSpacing: "0.04em"
+        {/* Circle X Logo */}
+        <div style={{
+          width: "40px",
+          height: "40px",
+          borderRadius: "50%",
+          border: "2px solid #ffffff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          background: "rgba(255, 255, 255, 0.05)",
+          backdropFilter: "blur(10px)"
         }}>
-          Circle X
+          {/* Premium Stylized X */}
+          <div style={{
+            position: "relative",
+            width: "24px",
+            height: "24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}>
+            <span style={{
+              fontSize: "18px",
+              fontWeight: "900",
+              color: "#ffffff",
+              fontFamily: "'Times New Roman', serif",
+              letterSpacing: "0px",
+              textShadow: "0 0 8px rgba(255,255,255,0.4)",
+              transform: "rotate(0deg)",
+              lineHeight: 1,
+              fontStyle: "italic"
+            }}>
+              x
+            </span>
+          </div>
         </div>
-        <div style={{ display: "flex", gap: "12px" }}>
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
           <Link to="/founder-login" className="btn btn-outline" style={{ fontSize: "14px", padding: "8px 16px" }}>
             Founder Login
           </Link>
@@ -44,7 +73,7 @@ export default function Index() {
             margin: "0 0 16px", 
             letterSpacing: "-0.02em"
           }}>
-            Circle X
+            x
           </h1>
           
           <div style={{ 
@@ -116,8 +145,8 @@ export default function Index() {
         </div>
         <div className="container grid grid-3">
           <div className="card">
-            <h4>LinkedIn is Noise</h4>
-            <p>Endless spam, random connections, zero signal in the noise.</p>
+            <h4>Traditional Networking is Broken</h4>
+            <p>Forced interactions, small talk, business cards nobody reads.</p>
           </div>
           <div className="card">
             <h4>Events are Outdated</h4>
@@ -173,8 +202,44 @@ export default function Index() {
 
       {/* Footer */}
       <footer className="footer">
-        <div style={{ textAlign: "right", color: "rgba(255,255,255,0.5)", fontSize: "13px" }}>
-          Made by <span style={{ fontWeight: 500 }}>MGX</span>
+        <div style={{ textAlign: "right", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+          {/* Circle X Logo */}
+          <div style={{
+            width: "28px",
+            height: "28px",
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            background: "rgba(255, 255, 255, 0.02)",
+            backdropFilter: "blur(5px)"
+          }}>
+            {/* Premium Stylized X */}
+            <div style={{
+              position: "relative",
+              width: "16px",
+              height: "16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+              <span style={{
+                fontSize: "10px",
+                fontWeight: "900",
+                color: "rgba(255,255,255,0.5)",
+                fontFamily: "'Times New Roman', serif",
+                letterSpacing: "0px",
+                textShadow: "0 0 4px rgba(255,255,255,0.2)",
+                transform: "rotate(0deg)",
+                lineHeight: 1,
+                fontStyle: "italic"
+              }}>
+                x
+              </span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
