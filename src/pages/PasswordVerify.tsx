@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import { roleService } from "../services/roleService";
 
 export default function PasswordVerify() {
   const navigate = useNavigate();
@@ -46,7 +47,10 @@ export default function PasswordVerify() {
         if (!data.profile_picture_url) {
           navigate('/profile-picture-setup');
         } else {
-          navigate('/founder');
+          // Route based on user role
+          const userRole = data.role || 'Founder';
+          const dashboardRoute = roleService.getDashboardRoute(userRole as any);
+          navigate(dashboardRoute);
         }
       }
     } catch (err) {

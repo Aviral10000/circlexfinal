@@ -26,6 +26,8 @@ import IdeaValidation from "./pages/IdeaValidation";
 import FounderScore from "./pages/FounderScore";
 import Verification from "./pages/Verification";
 import OnboardingWelcome from "./pages/OnboardingWelcome";
+import MentorDashboard from "./pages/MentorDashboard";
+import InvestorDashboard from "./pages/InvestorDashboard";
 
 function App() {
   return (
@@ -57,6 +59,8 @@ function App() {
       <Route path="/idea-validation" element={<IdeaValidation />} />
       <Route path="/founder-score" element={<FounderScore />} />
       <Route path="/verification" element={<Verification />} />
+      <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+      <Route path="/investor-dashboard" element={<InvestorDashboard />} />
     </Routes>
   );
 }

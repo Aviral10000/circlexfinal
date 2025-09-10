@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { roleService } from "../services/roleService";
 
 export default function ProfilePictureSetup() {
   const navigate = useNavigate();
@@ -47,9 +48,19 @@ export default function ProfilePictureSetup() {
     }
   };
 
+  const navigateToDashboard = async () => {
+    const founderId = sessionStorage.getItem('founder_id');
+    if (founderId) {
+      const userRole = await roleService.getUserRole(founderId);
+      const dashboardRoute = roleService.getDashboardRoute(userRole || 'Founder');
+      navigate(dashboardRoute);
+    } else {
+      navigate('/founder'); // fallback
+    }
+  };
+
   const handleSkip = () => {
-    // Navigate to dashboard or next step
-    navigate('/founder');
+    navigateToDashboard();
   };
 
   const handleContinue = () => {
@@ -57,7 +68,7 @@ export default function ProfilePictureSetup() {
       // Here you would typically upload the file to your server
       console.log('Uploading file:', selectedFile);
       // For now, just navigate to dashboard
-      navigate('/founder');
+      navigateToDashboard();
     }
   };
 

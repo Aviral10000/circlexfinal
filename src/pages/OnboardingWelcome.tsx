@@ -1,15 +1,41 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RoleSelection from "../components/RoleSelection";
+import { type UserRole } from "../services/roleService";
 
 export default function OnboardingWelcome() {
   const navigate = useNavigate();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showRoleSelection, setShowRoleSelection] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleGetStarted = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      navigate('/onboarding/step1');
+      setShowRoleSelection(true);
+      setIsAnimating(false);
     }, 500);
+  };
+
+  const handleRoleSelect = async (role: UserRole) => {
+    setLoading(true);
+    // In a real app, you would save the role to Supabase here
+    // For now, we'll just navigate to the appropriate dashboard
+    setTimeout(() => {
+      switch (role) {
+        case 'Founder':
+          navigate('/onboarding/step1');
+          break;
+        case 'Mentor':
+          navigate('/mentor-dashboard');
+          break;
+        case 'Investor':
+          navigate('/investor-dashboard');
+          break;
+        default:
+          navigate('/onboarding/step1');
+      }
+    }, 1000);
   };
 
   const features = [
@@ -41,6 +67,20 @@ export default function OnboardingWelcome() {
     { number: "1,000+", label: "Successful Matches" },
     { number: "50+", label: "Cities" }
   ];
+
+  if (showRoleSelection) {
+    return (
+      <div style={{ 
+        minHeight: "100vh", 
+        background: "linear-gradient(135deg, #000 0%, #1a1a1a 100%)",
+        color: "#fff",
+        position: "relative",
+        overflow: "hidden"
+      }}>
+        <RoleSelection onRoleSelect={handleRoleSelect} loading={loading} />
+      </div>
+    );
+  }
 
   return (
     <div style={{ 
