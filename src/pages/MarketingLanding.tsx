@@ -172,14 +172,23 @@ export default function MarketingLanding() {
           <h1 style={{
             fontSize: "clamp(48px, 8vw, 96px)",
             fontWeight: 300,
-            margin: "0 0 24px",
+            margin: "0 0 16px",
             letterSpacing: "-0.02em",
             background: "linear-gradient(135deg, #00ff88 0%, #8b5cf6 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent"
           }}>
-            India's Exclusive Founder Network
+            circle x
           </h1>
+          <h2 style={{
+            fontSize: "clamp(24px, 4vw, 36px)",
+            fontWeight: 300,
+            margin: "0 0 24px",
+            letterSpacing: "-0.01em",
+            color: "rgba(255, 255, 255, 0.9)"
+          }}>
+            India's Exclusive Founder Network
+          </h2>
           <p style={{
             fontSize: "clamp(18px, 3vw, 24px)",
             color: "rgba(255, 255, 255, 0.8)",
