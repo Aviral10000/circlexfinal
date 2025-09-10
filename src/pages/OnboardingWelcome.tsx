@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RoleSelection from "../components/RoleSelection";
-import { type UserRole } from "../services/roleService";
+import { type UserRole, roleService } from "../services/roleService";
 
 export default function OnboardingWelcome() {
   const navigate = useNavigate();
@@ -9,15 +9,21 @@ export default function OnboardingWelcome() {
   const [showRoleSelection, setShowRoleSelection] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Check if user is already logged in
+  // Check if user is already logged in and has selected a role
   useEffect(() => {
     const founderEmail = sessionStorage.getItem('founder_email');
-    if (founderEmail) {
-      // User is already logged in, but still show welcome screen first
-      // They can click "Get Started" to proceed to role selection
-      console.log('User is logged in, showing welcome screen');
+    const userRole = sessionStorage.getItem('user_role');
+    
+    if (founderEmail && userRole) {
+      // User is logged in and has already selected a role, go directly to dashboard
+      const dashboardRoute = roleService.getDashboardRoute(userRole as any);
+      navigate(dashboardRoute);
+    } else if (founderEmail && !userRole) {
+      // User is logged in but hasn't selected a role yet, show role selection directly
+      setShowRoleSelection(true);
     }
-  }, []);
+    // If no founderEmail, show welcome screen (new user)
+  }, [navigate]);
 
   const handleGetStarted = () => {
     setIsAnimating(true);
@@ -29,22 +35,15 @@ export default function OnboardingWelcome() {
 
   const handleRoleSelect = async (role: UserRole) => {
     setLoading(true);
-    // In a real app, you would save the role to Supabase here
+    
+    // Save the selected role to session storage
+    sessionStorage.setItem('user_role', role);
+    
+    // In a real app, you would also save the role to Supabase here
     // For now, we'll just navigate to the appropriate dashboard
     setTimeout(() => {
-      switch (role) {
-        case 'Founder':
-          navigate('/founder');
-          break;
-        case 'Mentor':
-          navigate('/mentor-dashboard');
-          break;
-        case 'Investor':
-          navigate('/investor-dashboard');
-          break;
-        default:
-          navigate('/founder');
-      }
+      const dashboardRoute = roleService.getDashboardRoute(role);
+      navigate(dashboardRoute);
     }, 1000);
   };
 

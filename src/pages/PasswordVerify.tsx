@@ -43,12 +43,15 @@ export default function PasswordVerify() {
         sessionStorage.setItem('founder_id', data.id);
         sessionStorage.removeItem('pending_email');
         
+        // Save user role to session storage
+        const userRole = data.role || 'Founder';
+        sessionStorage.setItem('user_role', userRole);
+        
         // Check if this is first-time login (no profile picture set)
         if (!data.profile_picture_url) {
           navigate('/profile-picture-setup');
         } else {
           // Route based on user role
-          const userRole = data.role || 'Founder';
           const dashboardRoute = roleService.getDashboardRoute(userRole as any);
           navigate(dashboardRoute);
         }
