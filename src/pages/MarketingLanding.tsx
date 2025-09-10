@@ -132,7 +132,7 @@ export default function MarketingLanding() {
               </span>
             </div>
             <div style={{ fontSize: "24px", fontWeight: "300", color: "#fff" }}>
-              Circle x
+              circle x
             </div>
           </div>
           <div>
@@ -742,13 +742,13 @@ export default function MarketingLanding() {
                 x
               </span>
             </div>
-            <span style={{ fontSize: "16px", fontWeight: "300" }}>Circle x</span>
+            <span style={{ fontSize: "16px", fontWeight: "300" }}>circle x</span>
           </div>
           <p style={{ fontSize: "14px", margin: "0 0 8px" }}>
             India's Exclusive Founder Network
           </p>
           <p style={{ fontSize: "12px", margin: 0 }}>
-            © 2024 Circle x. All rights reserved.
+            © 2024 circle x. All rights reserved.
           </p>
         </footer>
       </div>
