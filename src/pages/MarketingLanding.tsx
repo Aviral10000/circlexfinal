@@ -157,107 +157,210 @@ export default function MarketingLanding() {
 
         {/* Hero Section */}
         <section style={{
-          padding: "120px 32px 80px",
+          padding: "160px 32px 120px",
           textAlign: "center",
-          maxWidth: "1200px",
-          margin: "0 auto"
+          maxWidth: "1400px",
+          margin: "0 auto",
+          position: "relative"
         }}>
+          {/* Premium Background Elements */}
           <div style={{
-            fontSize: "48px",
-            marginBottom: "24px",
-            animation: "float 3s ease-in-out infinite"
-          }}>
-            🚀
-          </div>
-          <h1 style={{
-            fontSize: "clamp(48px, 8vw, 96px)",
-            fontWeight: 300,
-            margin: "0 0 16px",
-            letterSpacing: "-0.02em",
-            background: "linear-gradient(135deg, #00ff88 0%, #8b5cf6 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
-          }}>
-            circle x
-          </h1>
-          <h2 style={{
-            fontSize: "clamp(24px, 4vw, 36px)",
-            fontWeight: 300,
-            margin: "0 0 24px",
-            letterSpacing: "-0.01em",
-            color: "rgba(255, 255, 255, 0.9)"
-          }}>
-            India's Exclusive Founder Network
-          </h2>
-          <p style={{
-            fontSize: "clamp(18px, 3vw, 24px)",
-            color: "rgba(255, 255, 255, 0.8)",
-            margin: "0 0 48px",
-            lineHeight: "1.6",
-            maxWidth: "800px",
-            marginLeft: "auto",
-            marginRight: "auto"
-          }}>
-            Private, curated, invitation-only platform connecting India's most ambitious founders with mentors and investors who can actually help them succeed.
-          </p>
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "800px",
+            height: "800px",
+            background: "radial-gradient(circle, rgba(0, 255, 136, 0.03) 0%, transparent 70%)",
+            borderRadius: "50%",
+            zIndex: 0
+          }}></div>
           
-          {/* CTA Buttons */}
           <div style={{
-            display: "flex",
-            gap: "24px",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            marginBottom: "80px"
-          }}>
-            <button
-              onClick={() => handleRoleCTA('Founder')}
-              style={{
-                background: "linear-gradient(135deg, #00ff88 0%, #00cc6a 100%)",
-                border: "none",
-                borderRadius: "12px",
-                padding: "16px 32px",
-                color: "#000",
-                fontSize: "18px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                boxShadow: "0 8px 32px rgba(0, 255, 136, 0.3)"
-              }}
-            >
-              Join as Founder
-            </button>
-            <button
-              onClick={() => handleRoleCTA('Mentor')}
-              style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "12px",
-                padding: "16px 32px",
-                color: "#fff",
-                fontSize: "18px",
-                fontWeight: "500",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-            >
-              Become a Mentor
-            </button>
-            <button
-              onClick={() => handleRoleCTA('Investor')}
-              style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "12px",
-                padding: "16px 32px",
-                color: "#fff",
-                fontSize: "18px",
-                fontWeight: "500",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-            >
-              Join as Investor
-            </button>
+            position: "absolute",
+            top: "20%",
+            right: "10%",
+            width: "400px",
+            height: "400px",
+            background: "radial-gradient(circle, rgba(139, 92, 246, 0.02) 0%, transparent 70%)",
+            borderRadius: "50%",
+            zIndex: 0
+          }}></div>
+
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {/* Premium Logo */}
+            <div style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "20px",
+              marginBottom: "40px"
+            }}>
+              <div style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                border: "2px solid rgba(255, 255, 255, 0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backdropFilter: "blur(20px)",
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+              }}>
+                <span style={{
+                  fontSize: "32px",
+                  fontWeight: "900",
+                  color: "#ffffff",
+                  fontFamily: "'Times New Roman', serif",
+                  textShadow: "0 0 20px rgba(255,255,255,0.5)",
+                  fontStyle: "italic"
+                }}>
+                  x
+                </span>
+              </div>
+            </div>
+
+            <h1 style={{
+              fontSize: "clamp(64px, 10vw, 120px)",
+              fontWeight: "200",
+              margin: "0 0 24px",
+              letterSpacing: "-0.04em",
+              background: "linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "0 0 40px rgba(255, 255, 255, 0.1)",
+              lineHeight: "0.9"
+            }}>
+              circle x
+            </h1>
+            
+            <div style={{
+              width: "120px",
+              height: "1px",
+              background: "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%)",
+              margin: "0 auto 40px"
+            }}></div>
+
+            <h2 style={{
+              fontSize: "clamp(28px, 4vw, 42px)",
+              fontWeight: "300",
+              margin: "0 0 32px",
+              letterSpacing: "-0.02em",
+              color: "rgba(255, 255, 255, 0.9)",
+              lineHeight: "1.2"
+            }}>
+              India's Exclusive Founder Network
+            </h2>
+            
+            <p style={{
+              fontSize: "clamp(18px, 2.5vw, 22px)",
+              color: "rgba(255, 255, 255, 0.7)",
+              margin: "0 0 60px",
+              lineHeight: "1.6",
+              maxWidth: "700px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              fontWeight: "300"
+            }}>
+              Private, curated, invitation-only platform connecting India's most ambitious founders with mentors and investors who can actually help them succeed.
+            </p>
+            
+            {/* Premium CTA Buttons */}
+            <div style={{
+              display: "flex",
+              gap: "20px",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              marginBottom: "100px"
+            }}>
+              <button
+                onClick={() => handleRoleCTA('Founder')}
+                style={{
+                  background: "linear-gradient(135deg, rgba(0, 255, 136, 0.9) 0%, rgba(0, 204, 106, 0.9) 100%)",
+                  border: "1px solid rgba(0, 255, 136, 0.3)",
+                  borderRadius: "16px",
+                  padding: "20px 40px",
+                  color: "#000",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  boxShadow: "0 20px 40px rgba(0, 255, 136, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                  backdropFilter: "blur(20px)",
+                  letterSpacing: "0.5px",
+                  textTransform: "uppercase"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 25px 50px rgba(0, 255, 136, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0, 255, 136, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
+                }}
+              >
+                Join as Founder
+              </button>
+              <button
+                onClick={() => handleRoleCTA('Mentor')}
+                style={{
+                  background: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderRadius: "16px",
+                  padding: "20px 40px",
+                  color: "#fff",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  backdropFilter: "blur(20px)",
+                  letterSpacing: "0.5px",
+                  textTransform: "uppercase"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }}
+              >
+                Become a Mentor
+              </button>
+              <button
+                onClick={() => handleRoleCTA('Investor')}
+                style={{
+                  background: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderRadius: "16px",
+                  padding: "20px 40px",
+                  color: "#fff",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  backdropFilter: "blur(20px)",
+                  letterSpacing: "0.5px",
+                  textTransform: "uppercase"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }}
+              >
+                Join as Investor
+              </button>
+            </div>
           </div>
         </section>
 
