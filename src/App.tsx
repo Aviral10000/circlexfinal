@@ -28,11 +28,13 @@ import Verification from "./pages/Verification";
 import OnboardingWelcome from "./pages/OnboardingWelcome";
 import MentorDashboard from "./pages/MentorDashboard";
 import InvestorDashboard from "./pages/InvestorDashboard";
+import MarketingLanding from "./pages/MarketingLanding";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
+      <Route path="/" element={<MarketingLanding />} />
+      <Route path="/app" element={<Index />} />
       <Route path="/onboarding" element={<OnboardingWelcome />} />
       <Route path="/onboarding/step1" element={<OnboardingStep1 />} />
       <Route path="/onboarding/step2" element={<OnboardingStep2 />} />
