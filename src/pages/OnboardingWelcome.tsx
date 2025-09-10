@@ -13,8 +13,9 @@ export default function OnboardingWelcome() {
   useEffect(() => {
     const founderEmail = sessionStorage.getItem('founder_email');
     if (founderEmail) {
-      // User is already logged in, show role selection directly
-      setShowRoleSelection(true);
+      // User is already logged in, but still show welcome screen first
+      // They can click "Get Started" to proceed to role selection
+      console.log('User is logged in, showing welcome screen');
     }
   }, []);
 
