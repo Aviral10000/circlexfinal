@@ -138,7 +138,7 @@ export default function FounderLogin() {
                 Don't have an account yet?
               </p>
               <button 
-                onClick={() => navigate('/onboarding/step1')}
+                onClick={() => navigate('/onboarding')}
                 className="btn btn-outline"
                 style={{ fontSize: "14px", padding: "8px 16px" }}
               >

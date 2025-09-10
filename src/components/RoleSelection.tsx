@@ -4,9 +4,10 @@ import { type UserRole } from "../services/roleService";
 interface RoleSelectionProps {
   onRoleSelect: (role: UserRole) => void;
   loading?: boolean;
+  isLoggedIn?: boolean;
 }
 
-export default function RoleSelection({ onRoleSelect, loading = false }: RoleSelectionProps) {
+export default function RoleSelection({ onRoleSelect, loading = false, isLoggedIn = false }: RoleSelectionProps) {
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
 
   const roles = [
@@ -54,7 +55,7 @@ export default function RoleSelection({ onRoleSelect, loading = false }: RoleSel
           color: "#fff",
           letterSpacing: "-0.02em"
         }}>
-          Choose Your Role
+          {isLoggedIn ? "Welcome Back!" : "Choose Your Role"}
         </h1>
         <p style={{
           fontSize: "18px",
@@ -62,7 +63,10 @@ export default function RoleSelection({ onRoleSelect, loading = false }: RoleSel
           margin: 0,
           lineHeight: "1.5"
         }}>
-          Select how you'd like to use Circle x to help us personalize your experience
+          {isLoggedIn 
+            ? "Select your role to access your personalized dashboard"
+            : "Select how you'd like to use Circle x to help us personalize your experience"
+          }
         </p>
       </div>
 

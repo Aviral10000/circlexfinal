@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RoleSelection from "../components/RoleSelection";
 import { type UserRole } from "../services/roleService";
@@ -8,6 +8,15 @@ export default function OnboardingWelcome() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showRoleSelection, setShowRoleSelection] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const founderEmail = sessionStorage.getItem('founder_email');
+    if (founderEmail) {
+      // User is already logged in, show role selection directly
+      setShowRoleSelection(true);
+    }
+  }, []);
 
   const handleGetStarted = () => {
     setIsAnimating(true);
@@ -24,7 +33,7 @@ export default function OnboardingWelcome() {
     setTimeout(() => {
       switch (role) {
         case 'Founder':
-          navigate('/onboarding/step1');
+          navigate('/founder');
           break;
         case 'Mentor':
           navigate('/mentor-dashboard');
@@ -33,7 +42,7 @@ export default function OnboardingWelcome() {
           navigate('/investor-dashboard');
           break;
         default:
-          navigate('/onboarding/step1');
+          navigate('/founder');
       }
     }, 1000);
   };
@@ -77,7 +86,11 @@ export default function OnboardingWelcome() {
         position: "relative",
         overflow: "hidden"
       }}>
-        <RoleSelection onRoleSelect={handleRoleSelect} loading={loading} />
+        <RoleSelection 
+          onRoleSelect={handleRoleSelect} 
+          loading={loading} 
+          isLoggedIn={!!sessionStorage.getItem('founder_email')}
+        />
       </div>
     );
   }
