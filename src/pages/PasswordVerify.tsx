@@ -9,6 +9,7 @@ export default function PasswordVerify() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const pendingEmail = sessionStorage.getItem('pending_email');
@@ -135,15 +136,35 @@ export default function PasswordVerify() {
                 />
               </div>
 
-              <input
-                className="input"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ marginBottom: "16px" }}
-              />
+              <div style={{ position: "relative", marginBottom: "16px" }}>
+                <input
+                  className="input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  style={{ paddingRight: "50px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "rgba(255,255,255,0.6)",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    padding: "4px"
+                  }}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
 
               <button
                 type="submit"

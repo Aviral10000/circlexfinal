@@ -11,6 +11,8 @@ export default function PasswordSetup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSetup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +46,10 @@ export default function PasswordSetup() {
         setMessage("❌ Error setting up password. Please try again.");
       } else {
         setMessage("✅ Password set successfully! Redirecting...");
-        // Store session and redirect
+        // Store session and redirect to role selection
         sessionStorage.setItem('founder_email', email || '');
         setTimeout(() => {
-          navigate('/founder');
+          navigate('/onboarding');
         }, 1500);
       }
     } catch (err) {
@@ -119,25 +121,67 @@ export default function PasswordSetup() {
             </p>
 
             <form onSubmit={handleSetup}>
-              <input
-                className="input"
-                type="password"
-                placeholder="Create a password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ marginBottom: "16px" }}
-              />
+              {/* Password Field */}
+              <div style={{ position: "relative", marginBottom: "16px" }}>
+                <input
+                  className="input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Create a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  style={{ paddingRight: "50px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "rgba(255,255,255,0.6)",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    padding: "4px"
+                  }}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
 
-              <input
-                className="input"
-                type="password"
-                placeholder="Confirm password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                style={{ marginBottom: "16px" }}
-              />
+              {/* Confirm Password Field */}
+              <div style={{ position: "relative", marginBottom: "16px" }}>
+                <input
+                  className="input"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  style={{ paddingRight: "50px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "rgba(255,255,255,0.6)",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    padding: "4px"
+                  }}
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
 
               <button
                 type="submit"
